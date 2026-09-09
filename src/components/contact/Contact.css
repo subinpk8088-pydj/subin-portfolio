@@ -25,11 +25,14 @@
 @media (min-width: 1024px) {
   .contact-section {
     padding: 5rem 3rem 4rem;
-    /* bottom-anchor the row layout so the image "stands" on the
-       same baseline as the right-side content instead of floating
-       in the middle of extra vertical space */
     justify-content: center;
   }
+}
+
+/* Scroll fix - prevent blank flash */
+#contact {
+  scroll-margin-top: 80px;
+  min-height: 100vh;
 }
 
 /* ---------- BACKGROUND EFFECTS ---------- */
@@ -149,8 +152,6 @@
   .contact-container {
     flex-direction: row;
     gap: 3rem;
-    /* Stretch both columns to the same height so the photo and the
-       text block match in length instead of one overshooting the other */
     align-items: stretch;
   }
 }
@@ -199,9 +200,6 @@
 
 @media (min-width: 1024px) {
   .contact-image-wrapper {
-    /* On desktop the flex row stretches .contact-left to match
-       .contact-right's height, so let that height win over the
-       aspect-ratio instead of fighting it */
     aspect-ratio: auto;
     height: 100%;
   }
@@ -714,8 +712,7 @@
   }
 }
 
-/* Large desktop / wide screens: cap growth so the split doesn't
-   sprawl and the image doesn't dwarf the content column */
+/* Large desktop / wide screens */
 @media (min-width: 1440px) {
   .contact-container {
     max-width: 88rem;

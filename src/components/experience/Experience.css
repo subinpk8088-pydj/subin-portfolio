@@ -24,6 +24,12 @@
   z-index: 10;
 }
 
+/* Scroll fix - prevent blank flash */
+#experience {
+  scroll-margin-top: 80px;
+  min-height: 100vh;
+}
+
 /* ---------- BACKGROUND GLOW ORBS ---------- */
 .glow-orb-top {
   position: absolute;

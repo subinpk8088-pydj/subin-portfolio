@@ -1,0 +1,777 @@
+/* ============================================
+   CONTACT SECTION - SPLIT LAYOUT
+   IMAGE LEFT | CONTENT RIGHT
+   ============================================ */
+
+/* ---------- SECTION CONTAINER ---------- */
+.contact-section {
+  position: relative;
+  padding: 4rem 1.25rem;
+  overflow: hidden;
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .contact-section {
+    padding: 5rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-section {
+    padding: 5rem 3rem 4rem;
+    /* bottom-anchor the row layout so the image "stands" on the
+       same baseline as the right-side content instead of floating
+       in the middle of extra vertical space */
+    justify-content: center;
+  }
+}
+
+/* ---------- BACKGROUND EFFECTS ---------- */
+.contact-bg-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.006) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.006) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.3;
+}
+
+.contact-glow-orb-top,
+.contact-glow-orb-bottom {
+  position: absolute;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+.contact-glow-orb-top {
+  top: -10rem;
+  right: -10rem;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.04), transparent 70%);
+  animation: contactOrbFloat 12s ease-in-out infinite;
+}
+
+.contact-glow-orb-bottom {
+  bottom: -10rem;
+  left: -10rem;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.04), transparent 70%);
+  animation: contactOrbFloat 14s ease-in-out infinite 2s;
+}
+
+.contact-glow-orb-center {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30rem;
+  height: 30rem;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.02), transparent 70%);
+  filter: blur(100px);
+}
+
+.contact-glow-orb-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.02), transparent 70%);
+}
+
+@keyframes contactOrbFloat {
+  0%, 100% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.4;
+  }
+  33% {
+    transform: scale(1.1) translate(15px, -15px);
+    opacity: 0.7;
+  }
+  66% {
+    transform: scale(0.9) translate(-15px, 15px);
+    opacity: 0.2;
+  }
+}
+
+/* ---------- FLOATING PARTICLES ---------- */
+.contact-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.contact-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particleFloat ease-in-out infinite;
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.05;
+  }
+  50% {
+    transform: translateY(-25px) translateX(8px);
+    opacity: 0.15;
+  }
+}
+
+/* ============================================
+   MAIN CONTAINER - SPLIT LAYOUT
+   ============================================ */
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 1024px) {
+  .contact-container {
+    flex-direction: row;
+    gap: 3rem;
+    /* Stretch both columns to the same height so the photo and the
+       text block match in length instead of one overshooting the other */
+    align-items: stretch;
+  }
+}
+
+/* ============================================
+   LEFT SIDE - IMAGE
+   ============================================ */
+.contact-left {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 420px;
+}
+
+@media (min-width: 768px) {
+  .contact-left {
+    max-width: 460px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-left {
+    flex: 0 0 44%;
+    max-width: 460px;
+    align-items: stretch;
+  }
+}
+
+@media (min-width: 1280px) {
+  .contact-left {
+    flex: 0 0 42%;
+    max-width: 500px;
+  }
+}
+
+.contact-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+@media (min-width: 1024px) {
+  .contact-image-wrapper {
+    /* On desktop the flex row stretches .contact-left to match
+       .contact-right's height, so let that height win over the
+       aspect-ratio instead of fighting it */
+    aspect-ratio: auto;
+    height: 100%;
+  }
+}
+
+.contact-hero-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  filter: drop-shadow(0 10px 40px rgba(0, 0, 0, 0.2));
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.contact-hero-image:hover {
+  filter: drop-shadow(0 15px 50px rgba(239, 68, 68, 0.1));
+}
+
+/* ============================================
+   RIGHT SIDE - CONTENT
+   ============================================ */
+.contact-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+@media (min-width: 1024px) {
+  .contact-right {
+    padding-left: 1rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* ---------- BADGE ---------- */
+.contact-badge-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-badge-wrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.65rem;
+  font-family: monospace;
+  background: rgba(19, 26, 42, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.06);
+  color: var(--muted);
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .contact-badge {
+    font-size: 0.7rem;
+    padding: 0.4rem 1.2rem;
+  }
+}
+
+.contact-badge-text {
+  color: var(--muted);
+}
+
+.contact-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22C55E;
+  animation: dotPulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}
+
+/* ---------- HEADING ---------- */
+.contact-heading {
+  width: 100%;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-heading.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+}
+
+@media (min-width: 768px) {
+  .contact-title {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-title {
+    font-size: 3.75rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .contact-title {
+    font-size: 4rem;
+  }
+}
+
+.contact-title-gradient {
+  display: inline-block;
+  background: linear-gradient(135deg, #E8EDF5 0%, #94A3B8 50%, #E8EDF5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.contact-title-highlight {
+  display: inline-block;
+  background: linear-gradient(135deg, #EF4444 0%, #F59E0B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+.contact-title-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #EF4444, #F59E0B);
+  border-radius: 2px;
+  opacity: 0.2;
+}
+
+/* ---------- SUBTITLE ---------- */
+.contact-subtitle {
+  font-size: 0.9rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-subtitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .contact-subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* ---------- CONTACT LINKS ---------- */
+.contact-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 480px) {
+  .contact-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- CONTACT LINK ---------- */
+.contact-link-wrapper {
+  width: 100%;
+  perspective: 800px;
+}
+
+.contact-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 0.75rem;
+  background: rgba(19, 26, 42, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.06);
+  color: var(--text);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .contact-link {
+    padding: 0.7rem 1rem;
+  }
+}
+
+.contact-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(148, 163, 184, 0.06), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.contact-link-hovered {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.contact-link-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 0.75rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* ---------- LINK ICON ---------- */
+.contact-link-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .contact-link-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+.contact-link-icon svg {
+  transition: transform 0.3s ease;
+}
+
+.contact-link:hover .contact-link-icon svg {
+  transform: rotate(5deg);
+}
+
+/* ---------- LINK LABEL ---------- */
+.contact-link-label {
+  flex: 1;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 768px) {
+  .contact-link-label {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-link-label {
+    font-size: 0.65rem;
+  }
+}
+
+/* ---------- LINK ARROW ---------- */
+.contact-link-arrow {
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.contact-link:hover .contact-link-arrow {
+  opacity: 1;
+}
+
+/* ---------- LINK DOT ---------- */
+.contact-link-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background-color 0.3s ease;
+}
+
+/* ---------- FOOTER ---------- */
+.contact-footer {
+  margin-top: 0.25rem;
+  text-align: left;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-footer.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-footer-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.6rem;
+  font-family: monospace;
+  background: rgba(19, 26, 42, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.04);
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+@media (min-width: 768px) {
+  .contact-footer-content {
+    font-size: 0.7rem;
+    padding: 0.6rem 1.4rem;
+    gap: 0.6rem;
+  }
+}
+
+.contact-footer-content .text-muted {
+  color: var(--muted);
+}
+
+.contact-footer-content .text-accent {
+  color: var(--accent);
+}
+
+.contact-footer-content .separator {
+  color: var(--muted);
+  opacity: 0.3;
+}
+
+/* ---------- DECORATIVE LINE ---------- */
+.contact-decorative-line {
+  width: 100%;
+  height: 1px;
+  max-width: 20rem;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  margin-top: 2rem;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-decorative-line.visible {
+  opacity: 0.1;
+  transform: scaleX(1);
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+/* Extra-small phones */
+@media (max-width: 380px) {
+  .contact-title {
+    font-size: 1.35rem;
+  }
+
+  .contact-left {
+    max-width: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-section {
+    padding: 2rem 1rem;
+  }
+
+  .contact-container {
+    gap: 1.5rem;
+  }
+
+  .contact-left {
+    max-width: 300px;
+  }
+
+  .contact-title {
+    font-size: 1.5rem;
+  }
+
+  .contact-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .contact-links-grid {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .contact-link {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .contact-link-icon {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .contact-link-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .contact-badge {
+    font-size: 0.55rem;
+    padding: 0.25rem 0.7rem;
+  }
+
+  .contact-footer-content {
+    font-size: 0.55rem;
+    padding: 0.3rem 0.7rem;
+  }
+
+  .contact-glow-orb-top,
+  .contact-glow-orb-bottom {
+    width: 10rem;
+    height: 10rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .contact-left {
+    max-width: 380px;
+  }
+
+  .contact-title {
+    font-size: 2rem;
+  }
+
+  .contact-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .contact-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .contact-container {
+    gap: 2.5rem;
+  }
+
+  .contact-left {
+    max-width: 460px;
+  }
+
+  .contact-title {
+    font-size: 2.5rem;
+  }
+}
+
+/* Large desktop / wide screens: cap growth so the split doesn't
+   sprawl and the image doesn't dwarf the content column */
+@media (min-width: 1440px) {
+  .contact-container {
+    max-width: 88rem;
+  }
+
+  .contact-left {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .contact-container {
+    max-width: 96rem;
+  }
+
+  .contact-left {
+    max-width: 580px;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .contact-link-hovered {
+    transform: none !important;
+  }
+
+  .contact-glow-orb-top,
+  .contact-glow-orb-bottom {
+    animation: none !important;
+  }
+
+  .contact-particle {
+    animation: none !important;
+  }
+
+  .contact-badge-wrapper,
+  .contact-heading,
+  .contact-subtitle,
+  .contact-footer,
+  .contact-decorative-line {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .contact-left,
+  .contact-right {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,213 @@
+/* ============================================
+   PROJECTS SECTION - CLEAN VERSION
+   ============================================ */
+
+.projects-section {
+  position: relative;
+  padding: 5rem 1.25rem;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+@media (min-width: 768px) {
+  .projects-section {
+    padding: 7rem 2rem;
+  }
+}
+
+.projects-content {
+  max-width: 80rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* Glow Orbs */
+.glow-orb-top {
+  position: absolute;
+  top: -10rem;
+  right: -10rem;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.05), transparent 70%);
+  filter: blur(60px);
+  animation: orbFloat 8s ease-in-out infinite;
+}
+
+.glow-orb-bottom {
+  position: absolute;
+  bottom: -10rem;
+  left: -10rem;
+  width: 24rem;
+  height: 24rem;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.05), transparent 70%);
+  filter: blur(60px);
+  animation: orbFloat 10s ease-in-out infinite 2s;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.2); opacity: 0.5; }
+}
+
+/* Header */
+.projects-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 3rem;
+}
+
+.eyebrow-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.eyebrow-line {
+  width: 2rem;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.eyebrow-text {
+  font-family: monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .eyebrow-text { font-size: 0.875rem; }
+}
+
+.projects-title {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.02;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .projects-title { font-size: 4.5rem; }
+}
+
+@media (min-width: 1024px) {
+  .projects-title { font-size: 6rem; }
+}
+
+.title-gradient {
+  display: inline-block;
+  background: linear-gradient(135deg, #E8EDF5 0%, #EF4444 50%, #F59E0B 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.projects-subtitle {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin: 0.5rem 0 0 0;
+  padding: 0;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .projects-subtitle { font-size: 1.25rem; }
+}
+
+@media (min-width: 1024px) {
+  .projects-subtitle { font-size: 1.5rem; }
+}
+
+.subtitle-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.project-grid-item {
+  height: 100%;
+}
+
+/* Empty State */
+.projects-empty {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(148, 163, 184, 0.1);
+  margin-top: 2rem;
+}
+
+.projects-empty-text {
+  font-size: 1rem;
+  color: var(--muted);
+  font-family: monospace;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .projects-section { padding: 3rem 1rem; }
+  .projects-title { font-size: 2.25rem; }
+  .projects-subtitle { font-size: 0.9rem; }
+  .projects-header { margin-bottom: 2rem; }
+  .projects-grid { gap: 1rem; }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .projects-title { font-size: 3.5rem; }
+  .projects-subtitle { font-size: 1rem; }
+  .projects-section { padding: 4rem 1.5rem; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .projects-title { font-size: 5rem; }
+  .projects-subtitle { font-size: 1.25rem; }
+  .projects-section { padding: 6rem 2rem; }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; }
+  .glow-orb-top, .glow-orb-bottom, .title-gradient { animation: none; }
+}

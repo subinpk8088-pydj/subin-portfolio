@@ -1,0 +1,196 @@
+/* ============================================
+   SMOOTH SCROLL & BASE
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============================================
+   GRADIENT & GLOW EFFECTS
+   ============================================ */
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent), #F59E0B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glow-hover {
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.glow-hover:hover {
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.15);
+}
+
+/* Animated border gradient - OPTIMIZED */
+.animated-border {
+  position: relative;
+}
+.animated-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--accent), #F59E0B, var(--accent));
+  background-size: 300% 300%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderRotate 4s linear infinite;
+}
+@keyframes borderRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ============================================
+   SLIDE IN ANIMATIONS - FASTER
+   ============================================ */
+
+.slide-in-left {
+  animation: slideInLeft 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.slide-in-up {
+  animation: slideInUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   FLOATING & PULSING - OPTIMIZED
+   ============================================ */
+
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.pulse-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ============================================
+   STAGGERED CHILDREN - OPTIMIZED
+   ============================================ */
+
+.stagger-children > * {
+  opacity: 0;
+  animation: slideInUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+
+/* ============================================
+   CARD & IMAGE HOVER
+   ============================================ */
+
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.image-zoom {
+  overflow: hidden;
+}
+.image-zoom img {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.image-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   REDUCED MOTION - ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animated-border::before {
+    animation: none !important;
+  }
+  
+  .float-animation {
+    animation: none !important;
+  }
+  
+  .pulse-glow {
+    animation: none !important;
+  }
+  
+  .stagger-children > * {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+  
+  .glow-hover:hover {
+    box-shadow: none !important;
+  }
+  
+  .card-hover:hover {
+    transform: none !important;
+  }
+  
+  .image-zoom:hover img {
+    transform: none !important;
+  }
+}
+
+/* ============================================
+   MOBILE OPTIMIZATIONS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .stagger-children > * {
+    animation-duration: 0.3s !important;
+  }
+  
+  .slide-in-left,
+  .slide-in-right,
+  .slide-in-up {
+    animation-duration: 0.3s !important;
+  }
+  
+  .float-animation {
+    animation-duration: 5s !important;
+  }
+}

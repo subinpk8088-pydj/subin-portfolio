@@ -1,0 +1,45 @@
+.project-filters-wrapper {
+  margin-bottom: 2rem;
+}
+
+.project-filters-scroll {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.25rem 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.2) transparent;
+}
+
+.project-filters-scroll::-webkit-scrollbar { height: 3px; }
+.project-filters-scroll::-webkit-scrollbar-track { background: transparent; }
+.project-filters-scroll::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 9999px;
+}
+
+.project-filter-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .project-filter-btn {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-filters-wrapper { margin-bottom: 1.5rem; }
+  .project-filter-btn {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.7rem;
+  }
+}

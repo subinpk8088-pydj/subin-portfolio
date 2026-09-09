@@ -1,0 +1,299 @@
+/* ============================================
+   STATS SECTION - FULL WIDTH NO GAPS
+   ============================================ */
+
+.stats-section {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg);
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+/* ---------- MEDIA WRAPPER (image + overlay) ---------- */
+/* Desktop: acts as a full-bleed background layer, same as before */
+.stats-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.stats-bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.stats-overlay-light {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 15, 25, 0.3);
+}
+
+/* ---------- CONTAINER ---------- */
+.stats-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+  z-index: 2;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  min-height: 100vh;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+}
+
+.stats-left {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .stats-left {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+  }
+}
+
+.stats-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 3rem 2rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .stats-right { padding: 4rem 3rem; }
+}
+
+@media (min-width: 1024px) {
+  .stats-right {
+    padding: 4rem 4rem 4rem 2rem;
+    max-width: 90%;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 1280px) {
+  .stats-right {
+    padding: 5rem 5rem 5rem 3rem;
+    max-width: 85%;
+  }
+}
+
+.stats-terminal-wrapper { width: 100%; }
+
+.stats-cards-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .stats-cards-wrapper { grid-template-columns: repeat(3, 1fr); }
+}
+
+.stats-card {
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: rgba(11, 15, 25, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(148, 163, 184, 0.08);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.stats-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.stats-card-icon { color: var(--accent); margin-bottom: 0.5rem; flex-shrink: 0; }
+
+.stats-card-value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.15rem;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .stats-card-value { font-size: 2.5rem; }
+}
+
+.stats-card-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.15rem;
+}
+
+.stats-card-detail {
+  font-size: 0.65rem;
+  font-family: monospace;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+/* ============================================
+   MOBILE + TABLET: IMAGE BANNER ON TOP,
+   CONTENT FLOWS BELOW ON SOLID BACKGROUND
+   ============================================ */
+
+@media (max-width: 1023px) {
+  .stats-section {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    width: 100%;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Image becomes a real, visible banner in normal flow */
+  .stats-media {
+    position: relative;
+    inset: auto;
+    order: 1;
+    width: 100%;
+    height: 46vh;
+    min-height: 280px;
+    max-height: 420px;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .stats-bg-image { position: absolute; inset: 0; }
+  .stats-overlay-light {
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 15, 25, 0.15); /* light, just for contrast, image stays visible */
+  }
+
+  /* Content flows below the image, on solid bg */
+  .stats-container {
+    order: 2;
+    z-index: 2;
+    background: var(--bg);
+  }
+
+  .stats-grid {
+    min-height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .stats-left { display: none !important; }
+
+  .stats-right {
+    padding: 2rem 1.25rem;
+    gap: 1.25rem;
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+/* Phones */
+@media (max-width: 767px) {
+  .stats-media {
+    height: 38vh;
+    min-height: 240px;
+    max-height: 340px;
+  }
+
+  .stats-right {
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
+
+  .stats-terminal-wrapper { margin-bottom: 0.5rem; }
+  .stats-terminal-wrapper > div { border-radius: 1rem !important; }
+
+  .stats-cards-wrapper {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem;
+  }
+
+  .stats-card {
+    padding: 1rem;
+    background: rgba(11, 15, 25, 0.75);
+    backdrop-filter: blur(20px);
+  }
+
+  .stats-card-value { font-size: 1.5rem; }
+  .stats-card-label { font-size: 0.75rem; }
+  .stats-card-detail { font-size: 0.6rem; }
+  .stats-card-icon { width: 18px; height: 18px; margin-bottom: 0.35rem; }
+}
+
+@media (max-width: 480px) {
+  .stats-media {
+    height: 32vh;
+    min-height: 200px;
+  }
+
+  .stats-right { padding: 1rem 0.75rem; gap: 0.75rem; }
+
+  .stats-card { padding: 0.75rem; border-radius: 0.75rem; }
+  .stats-card-value { font-size: 1.25rem; }
+  .stats-card-icon { width: 16px; height: 16px; margin-bottom: 0.25rem; }
+  .stats-card-label { font-size: 0.7rem; }
+  .stats-card-detail { font-size: 0.55rem; }
+  .stats-cards-wrapper { gap: 0.5rem; }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .stats-media {
+    height: 50vh;
+    min-height: 320px;
+    max-height: 460px;
+  }
+
+  .stats-right { padding: 2.5rem 2rem; }
+  .stats-card { padding: 1.25rem; }
+  .stats-card-value { font-size: 2rem; }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .stats-right { padding: 4rem 3rem 4rem 2rem; max-width: 85%; }
+  .stats-card { padding: 1.1rem; }
+  .stats-card-value { font-size: 2.2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stats-card:hover { transform: none; }
+}

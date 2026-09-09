@@ -24,7 +24,7 @@ export const Navbar = ({ scrollTo, activeSection }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, [menuOpen]);
 
-  // Handle scroll with proper fallback
+  // Handle scroll with proper fallback and offset
   const handleScrollTo = (id) => {
     // Close mobile menu
     setMenuOpen(false);
@@ -33,12 +33,16 @@ export const Navbar = ({ scrollTo, activeSection }) => {
     if (scrollTo) {
       scrollTo(id);
     } else {
-      // Fallback: directly find element
+      // Fallback: directly find element with offset
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ 
-          behavior: "smooth", 
-          block: "start" 
+        const navbarHeight = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
         });
       }
     }

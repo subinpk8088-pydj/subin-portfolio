@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Hero } from "./components/home/Hero";
 import { Stats } from "./components/home/Stats";
 import { Experience } from "./components/experience/Experience";
@@ -13,15 +13,34 @@ import "./styles/animations.css";
 
 function App() {
   const [activeSection, setActiveSection] = useState("about");
+  const [isScrolling, setIsScrolling] = useState(false);
+  const scrollTimeout = useRef(null);
 
-  // Simple scroll function using document.getElementById
+  // Improved scroll function with offset
   const scrollTo = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ 
-        behavior: "smooth", 
-        block: "start" 
+      setIsScrolling(true);
+      
+      // Clear any existing timeout
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+
+      // Get navbar height offset (adjust based on your navbar height)
+      const navbarHeight = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
       });
+
+      // Reset scrolling state after animation completes
+      scrollTimeout.current = setTimeout(() => {
+        setIsScrolling(false);
+      }, 800);
     }
   };
 
@@ -29,12 +48,16 @@ function App() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          // Only update active section if not currently scrolling programmatically
+          if (entry.isIntersecting && !isScrolling) {
             setActiveSection(entry.target.id);
           }
         });
       },
-      { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
+      { 
+        rootMargin: "-30% 0px -40% 0px", 
+        threshold: 0.1 
+      }
     );
 
     // Observe all sections by ID
@@ -46,8 +69,13 @@ function App() {
       }
     });
 
-    return () => observer.disconnect();
-  }, []);
+    return () => {
+      observer.disconnect();
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
+  }, [isScrolling]);
 
   return (
     <div

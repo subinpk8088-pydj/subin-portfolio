@@ -23,6 +23,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 body {
@@ -30,6 +31,33 @@ body {
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ============================================
+   SCROLL FIX - Prevent blank sections
+   ============================================ */
+
+/* Ensure sections have proper height and scroll offset */
+#about,
+#experience,
+#projects,
+#skills,
+#contact {
+  scroll-margin-top: 80px;
+  min-height: 100vh;
+  position: relative;
+}
+
+section {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* Smooth section transitions */
+section {
+  transition: opacity 0.3s ease;
 }
 
 /* ============================================

@@ -739,8 +739,8 @@
   }
 }
 
-/* Tablets (481px - 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
+/* Tablets (481px - 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
   .experience-title {
     font-size: 3.5rem;
   }
@@ -762,8 +762,8 @@
   }
 }
 
-/* Tablets & Small Laptops (769px - 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
+/* Tablets & Small Laptops (769px - 1023px) */
+@media (min-width: 769px) and (max-width: 1023px) {
   .experience-title {
     font-size: 5rem;
   }
